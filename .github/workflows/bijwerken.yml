@@ -1,0 +1,46 @@
+name: Data bijwerken
+
+on:
+  schedule:
+    - cron: "20 * * * *"      # elk uur; IRCEL-CELINE publiceert uurwaarden met ~1 uur vertraging
+  workflow_dispatch:           # handmatig starten vanuit het tabblad Actions
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bijwerken
+  cancel-in-progress: false
+
+jobs:
+  bijwerken:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Metingen ophalen (laatste 7 dagen; maandag 03 UTC ook nieuwe meetreeksen zoeken)
+        run: |
+          if [ "$(date -u +%u%H)" = "103" ]; then python src/ophalen.py --ontdek; else python src/ophalen.py; fi
+
+      - name: Dashboard bouwen
+        run: python src/dashboard.py
+
+      - name: Wijzigingen bewaren
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data docs
+          if git diff --cached --quiet; then
+            echo "Geen nieuwe data."
+          else
+            git commit -m "Data-update $(date -u +'%Y-%m-%d %H:%M') UTC"
+            git push
+          fi
