@@ -1,0 +1,47 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "ce5549d100224061a8f3",
+  "position": {
+    "x": 40,
+    "y": 20,
+    "z": 0,
+    "width": 1840,
+    "height": 130,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Datakwaliteit van het meetnet",
+                    "textStyle": {
+                      "fontSize": "28pt",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Automatische controle per meetreeks: storing (> 6 u geen data), vastgelopen meting (≥ 24 identieke uurwaarden), lokale pieken en verschuiving t.o.v. het netwerk",
+                    "textStyle": {
+                      "fontSize": "16pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

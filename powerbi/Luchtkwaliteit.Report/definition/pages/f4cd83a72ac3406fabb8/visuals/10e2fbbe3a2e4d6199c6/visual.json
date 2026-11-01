@@ -1,0 +1,47 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "10e2fbbe3a2e4d6199c6",
+  "position": {
+    "x": 40,
+    "y": 20,
+    "z": 0,
+    "width": 1300,
+    "height": 130,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Normen: WHO en EU 2030",
+                    "textStyle": {
+                      "fontSize": "28pt",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Daggemiddelden met minstens 18 geldige uren, getoetst aan de WHO-richtlijnen 2021 en de EU-grenswaarden vanaf 2030",
+                    "textStyle": {
+                      "fontSize": "16pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

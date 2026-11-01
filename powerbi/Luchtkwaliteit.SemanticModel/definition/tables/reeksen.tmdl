@@ -1,0 +1,205 @@
+table reeksen
+	lineageTag: d0712106-d43f-4df6-925b-47372ba2a31d
+
+	measure Meetreeksen = COUNTROWS ( reeksen )
+		formatString: 0
+		displayFolder: Datakwaliteit
+		lineageTag: cd741ede-8bd9-4bdc-a0e5-a35090aa00df
+
+	measure 'Reeksen OK' = CALCULATE ( COUNTROWS ( reeksen ), reeksen[status] = "OK" ) + 0
+		formatString: 0
+		displayFolder: Datakwaliteit
+		lineageTag: 0b0a73e8-3623-478d-8494-b1a2aec09f9b
+
+	measure 'Reeksen met waarschuwing' = CALCULATE ( COUNTROWS ( reeksen ), reeksen[status] = "Waarschuwing" ) + 0
+		formatString: 0
+		displayFolder: Datakwaliteit
+		lineageTag: bd7121a1-72e3-49b9-9025-a088aef3911d
+
+	measure 'Reeksen in storing' = CALCULATE ( COUNTROWS ( reeksen ), reeksen[status] = "Storing" ) + 0
+		formatString: 0
+		displayFolder: Datakwaliteit
+		lineageTag: c910d0b5-893c-4d2f-ad54-b7a65c56181a
+
+	measure 'Gem. volledigheid 30 dagen' = AVERAGE ( reeksen[volledigheid_30d] )
+		formatString: 0.0%
+		displayFolder: Datakwaliteit
+		lineageTag: 6aaa4d84-6407-4b89-8bd2-99ec130ccacb
+
+	column reeks_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 6b2c2537-2be7-4882-8fcd-f81243088e15
+		summarizeBy: none
+		sourceColumn: reeks_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column station_id
+		dataType: int64
+		formatString: 0
+		lineageTag: a266a0f8-19b6-4edc-b79b-058fc8830533
+		summarizeBy: none
+		sourceColumn: station_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column station_code
+		dataType: string
+		lineageTag: 08dd9cf5-3dc0-43b1-894c-9a1561cee3df
+		summarizeBy: none
+		sourceColumn: station_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column station
+		dataType: string
+		lineageTag: b728a2cb-e981-4ab4-b6f9-14de469b4348
+		summarizeBy: none
+		sourceColumn: station
+
+		annotation SummarizationSetBy = Automatic
+
+	column lat
+		dataType: double
+		dataCategory: Latitude
+		formatString: 0.00000
+		lineageTag: ca6447e8-e79b-408d-a96c-620a4e934905
+		summarizeBy: none
+		sourceColumn: lat
+
+		annotation SummarizationSetBy = Automatic
+
+	column lon
+		dataType: double
+		dataCategory: Longitude
+		formatString: 0.00000
+		lineageTag: fd8ec0c3-5912-4c0e-b4b1-8d703031242f
+		summarizeBy: none
+		sourceColumn: lon
+
+		annotation SummarizationSetBy = Automatic
+
+	column stof
+		dataType: string
+		lineageTag: 22bf9ace-1620-46c8-8ba5-37c629a2dd66
+		summarizeBy: none
+		sourceColumn: stof
+
+		annotation SummarizationSetBy = Automatic
+
+	column eenheid
+		dataType: string
+		lineageTag: fa537b5d-f5ac-4852-a121-0e385aaaca3c
+		summarizeBy: none
+		sourceColumn: eenheid
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 51aa0c29-7410-4b0a-80da-7cb47e96ea6e
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column reden
+		dataType: string
+		lineageTag: bbfb4bd9-12a6-4198-808f-e57176d29791
+		summarizeBy: none
+		sourceColumn: reden
+
+		annotation SummarizationSetBy = Automatic
+
+	column laatste_meting
+		dataType: dateTime
+		formatString: dd-mm-yyyy hh:nn
+		lineageTag: a0c6e7aa-3da7-434f-880b-3035b42c8b5c
+		summarizeBy: none
+		sourceColumn: laatste_meting
+
+		annotation SummarizationSetBy = Automatic
+
+	column laatste_waarde
+		dataType: double
+		formatString: 0.0
+		lineageTag: 70fa2ab2-d357-40e6-8da3-dd3d75783f92
+		summarizeBy: none
+		sourceColumn: laatste_waarde
+
+		annotation SummarizationSetBy = Automatic
+
+	column volledigheid_7d
+		dataType: double
+		formatString: 0%
+		lineageTag: 60a7774e-9748-4017-a2c6-a6ee1033034f
+		summarizeBy: none
+		sourceColumn: volledigheid_7d
+
+		annotation SummarizationSetBy = Automatic
+
+	column volledigheid_30d
+		dataType: double
+		formatString: 0%
+		lineageTag: 7249dccb-acb2-4e73-9db5-f76ad035224a
+		summarizeBy: none
+		sourceColumn: volledigheid_30d
+
+		annotation SummarizationSetBy = Automatic
+
+	column vlakke_uren_30d
+		dataType: int64
+		formatString: 0
+		lineageTag: 34adc6f1-33a1-4b77-ab91-8cc7881cdefe
+		summarizeBy: none
+		sourceColumn: vlakke_uren_30d
+
+		annotation SummarizationSetBy = Automatic
+
+	column lokale_pieken_30d
+		dataType: int64
+		formatString: 0
+		lineageTag: fe2ef58b-2c29-4b1f-9823-eab65a0fdc31
+		summarizeBy: none
+		sourceColumn: lokale_pieken_30d
+
+		annotation SummarizationSetBy = Automatic
+
+	column station_label
+		dataType: string
+		lineageTag: e564a691-8843-4936-bf12-30b788f4c414
+		summarizeBy: none
+		sourceColumn: station_label
+
+		annotation SummarizationSetBy = Automatic
+
+	column status_label
+		dataType: string
+		sortByColumn: status_volgorde
+		lineageTag: b6c10f66-8ebd-422a-83c1-2fc508117b66
+		summarizeBy: none
+		sourceColumn: status_label
+
+		annotation SummarizationSetBy = Automatic
+
+	column status_volgorde
+		dataType: int64
+		formatString: 0
+		lineageTag: 90dc65c8-c974-4314-953e-27380a86e876
+		summarizeBy: none
+		sourceColumn: status_volgorde
+
+		annotation SummarizationSetBy = Automatic
+
+	partition reeksen = m
+		mode: import
+		source =
+			let
+			    Inhoud = Csv.Document ( Web.Contents ( DataUrl & "powerbi/reeksen.csv" ), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv] ),
+			    Koppen = Table.PromoteHeaders ( Inhoud, [PromoteAllScalars = true] ),
+			    Types = Table.TransformColumnTypes ( Koppen, {{"reeks_id", Int64.Type}, {"station_id", Int64.Type}, {"station_code", type text}, {"station", type text}, {"lat", type number}, {"lon", type number}, {"stof", type text}, {"eenheid", type text}, {"status", type text}, {"reden", type text}, {"laatste_meting", type datetime}, {"laatste_waarde", type number}, {"volledigheid_7d", type number}, {"volledigheid_30d", type number}, {"vlakke_uren_30d", Int64.Type}, {"lokale_pieken_30d", Int64.Type}, {"station_label", type text}, {"status_label", type text}, {"status_volgorde", Int64.Type}}, "en-US" )
+			in
+			    Types
+
+	annotation PBI_ResultType = Table

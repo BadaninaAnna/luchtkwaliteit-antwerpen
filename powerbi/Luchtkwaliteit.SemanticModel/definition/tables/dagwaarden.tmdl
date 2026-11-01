@@ -1,0 +1,96 @@
+table dagwaarden
+	lineageTag: 9b2ec038-f672-4156-810c-eece7628b162
+
+	measure Gemiddelde = AVERAGE ( dagwaarden[daggemiddelde] )
+		formatString: 0.0
+		displayFolder: Normen
+		lineageTag: f80b1273-ea02-46b0-9a68-9d7e66a81d49
+
+	measure 'Stationsdagen boven WHO' = SUM ( dagwaarden[boven_who] )
+		formatString: #,0
+		displayFolder: Normen
+		lineageTag: 4ab2b546-b2ea-421b-8116-9684ce9f43de
+
+	measure 'Aandeel dagen boven WHO' = DIVIDE ( SUM ( dagwaarden[boven_who] ), COUNTROWS ( dagwaarden ) )
+		formatString: 0%
+		displayFolder: Normen
+		lineageTag: 43883265-cf17-4e30-b94e-9ff666f595da
+
+	measure 'Aandeel dagen boven EU 2030' = DIVIDE ( SUM ( dagwaarden[boven_eu_2030] ), COUNTROWS ( dagwaarden ) )
+		formatString: 0%
+		displayFolder: Normen
+		lineageTag: 25293871-0221-4a4d-b0cc-58bea1648fa4
+
+	column reeks_id
+		dataType: int64
+		formatString: 0
+		lineageTag: a33e99d2-df15-4457-a8cd-a965de67edad
+		summarizeBy: none
+		sourceColumn: reeks_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column stof
+		dataType: string
+		lineageTag: f723ca0a-c820-4e4a-839e-c1e7e23a337b
+		summarizeBy: none
+		sourceColumn: stof
+
+		annotation SummarizationSetBy = Automatic
+
+	column datum
+		dataType: dateTime
+		formatString: dd-mm-yyyy
+		lineageTag: 2151c971-4707-4199-8ce5-158daea166e2
+		summarizeBy: none
+		sourceColumn: datum
+
+		annotation SummarizationSetBy = Automatic
+
+	column daggemiddelde
+		dataType: double
+		formatString: 0.0
+		lineageTag: d4ba5ace-a0c6-4e7b-b965-ee302acbe16e
+		summarizeBy: average
+		sourceColumn: daggemiddelde
+
+		annotation SummarizationSetBy = Automatic
+
+	column uren
+		dataType: int64
+		formatString: 0
+		lineageTag: 9e0d75ea-6428-4bff-b507-a6fd38264edc
+		summarizeBy: sum
+		sourceColumn: uren
+
+		annotation SummarizationSetBy = Automatic
+
+	column boven_who
+		dataType: int64
+		formatString: 0
+		lineageTag: b91d53b2-4c3f-40e3-9a79-7995927067a9
+		summarizeBy: sum
+		sourceColumn: boven_who
+
+		annotation SummarizationSetBy = Automatic
+
+	column boven_eu_2030
+		dataType: int64
+		formatString: 0
+		lineageTag: 7cfe1332-9899-4866-9a29-d6b5b71911f4
+		summarizeBy: sum
+		sourceColumn: boven_eu_2030
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dagwaarden = m
+		mode: import
+		source =
+			let
+			    Inhoud = Csv.Document ( Web.Contents ( DataUrl & "powerbi/dagwaarden.csv" ), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv] ),
+			    Koppen = Table.PromoteHeaders ( Inhoud, [PromoteAllScalars = true] ),
+			    Types = Table.TransformColumnTypes ( Koppen, {{"reeks_id", Int64.Type}, {"stof", type text}, {"datum", type date}, {"daggemiddelde", type number}, {"uren", Int64.Type}, {"boven_who", Int64.Type}, {"boven_eu_2030", Int64.Type}}, "en-US" )
+			in
+			    Types
+
+	annotation PBI_ResultType = Table

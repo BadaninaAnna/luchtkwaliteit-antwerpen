@@ -1,0 +1,60 @@
+table Datum
+	dataCategory: Time
+	lineageTag: d775ee30-5c3c-4bd3-bae8-4d298161e2ca
+
+	column Date
+		isNameInferred
+		dataType: dateTime
+		isDataTypeInferred
+		isKey
+		formatString: dd-mm-yyyy
+		lineageTag: 343d7792-3735-44a3-991c-291b09411083
+		summarizeBy: none
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Jaar
+		isNameInferred
+		dataType: int64
+		isDataTypeInferred
+		formatString: 0
+		lineageTag: d46fa48b-a42e-4720-af60-2cbda86ff593
+		summarizeBy: none
+		sourceColumn: [Jaar]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Maand
+		isNameInferred
+		dataType: string
+		isDataTypeInferred
+		sortByColumn: MaandSort
+		lineageTag: 5d5bfd4b-cd2f-49be-ae8e-5a06b91b943d
+		summarizeBy: none
+		sourceColumn: [Maand]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MaandSort
+		isNameInferred
+		dataType: int64
+		isDataTypeInferred
+		formatString: 0
+		lineageTag: 33638c97-c67d-486c-a6a4-93f7458dd1ac
+		summarizeBy: none
+		sourceColumn: [MaandSort]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Datum = calculated
+		mode: import
+		source =
+			VAR basis = CALENDAR ( DATE ( 2025, 1, 1 ), TODAY () )
+			RETURN
+			    ADDCOLUMNS (
+			        basis,
+			        "Jaar", YEAR ( [Date] ),
+			        "Maand", FORMAT ( [Date], "yyyy-mm" ),
+			        "MaandSort", YEAR ( [Date] ) * 100 + MONTH ( [Date] )
+			    )

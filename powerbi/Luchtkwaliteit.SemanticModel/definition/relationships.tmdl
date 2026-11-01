@@ -1,0 +1,19 @@
+relationship 1f5afd02-c16a-4500-87d8-666a003be7b6
+	fromColumn: uurwaarden.reeks_id
+	toColumn: reeksen.reeks_id
+
+relationship c44db2f2-c879-44a2-a6d4-7c68a8c55b80
+	fromColumn: dagwaarden.reeks_id
+	toColumn: reeksen.reeks_id
+
+relationship 40d81c1f-7f2d-47ce-bace-3e0c4d97202a
+	fromColumn: reeksen.stof
+	toColumn: stoffen.stof
+
+relationship 34c543a6-bf61-4be3-9be0-d0d36621bdbc
+	fromColumn: dagwaarden.datum
+	toColumn: Datum.Date
+
+relationship 3aa1df9a-f828-40b5-ada5-40f1a9e28c0f
+	fromColumn: uurwaarden.datum
+	toColumn: Datum.Date

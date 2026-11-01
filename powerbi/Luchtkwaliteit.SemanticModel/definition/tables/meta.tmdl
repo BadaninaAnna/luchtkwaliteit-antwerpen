@@ -1,0 +1,37 @@
+table meta
+	lineageTag: d91685f4-ae1d-4f14-a845-9a903de75c4a
+
+	measure 'Laatste meting' = MAX ( meta[laatste_meting] )
+		formatString: dd-mm-yyyy hh:nn
+		displayFolder: Info
+		lineageTag: af487f53-80fc-4774-ad08-3d4f22c9ac50
+
+	column laatste_meting
+		dataType: dateTime
+		formatString: dd-mm-yyyy hh:nn
+		lineageTag: ebb1b837-0f24-4b1e-ba3b-e3b46fe1ebd5
+		summarizeBy: none
+		sourceColumn: laatste_meting
+
+		annotation SummarizationSetBy = Automatic
+
+	column bijgewerkt
+		dataType: dateTime
+		formatString: dd-mm-yyyy hh:nn
+		lineageTag: 7c640f1d-93af-4b52-b004-8b4bb8f8c54e
+		summarizeBy: none
+		sourceColumn: bijgewerkt
+
+		annotation SummarizationSetBy = Automatic
+
+	partition meta = m
+		mode: import
+		source =
+			let
+			    Inhoud = Csv.Document ( Web.Contents ( DataUrl & "powerbi/meta.csv" ), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv] ),
+			    Koppen = Table.PromoteHeaders ( Inhoud, [PromoteAllScalars = true] ),
+			    Types = Table.TransformColumnTypes ( Koppen, {{"laatste_meting", type datetime}, {"bijgewerkt", type datetime}}, "en-US" )
+			in
+			    Types
+
+	annotation PBI_ResultType = Table

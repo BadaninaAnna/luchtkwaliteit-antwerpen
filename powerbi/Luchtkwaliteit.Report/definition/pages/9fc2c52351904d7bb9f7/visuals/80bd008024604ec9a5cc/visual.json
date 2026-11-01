@@ -1,0 +1,47 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "80bd008024604ec9a5cc",
+  "position": {
+    "x": 40,
+    "y": 20,
+    "z": 0,
+    "width": 1300,
+    "height": 130,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Luchtkwaliteit Antwerpen: live",
+                    "textStyle": {
+                      "fontSize": "28pt",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "37 officiële meetstations · data van IRCEL-CELINE, elk uur bijgewerkt via GitHub Actions · klik op Vernieuwen voor de laatste metingen",
+                    "textStyle": {
+                      "fontSize": "16pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

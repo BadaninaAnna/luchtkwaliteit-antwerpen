@@ -1,0 +1,6 @@
+stof,naam,who_dag,eu_2030_dag,who_jaar,eu_2030_jaar,eu_nu_jaar,volgorde
+NO2,Stikstofdioxide (NO₂),25,50,10,20,40,1
+PM2.5,"Fijnstof PM2,5",15,25,5,10,25,2
+PM10,Fijnstof PM10,45,45,15,20,40,3
+BC,Black carbon (roet),,,,,,4
+O3,Ozon (O₃),,,,,,5

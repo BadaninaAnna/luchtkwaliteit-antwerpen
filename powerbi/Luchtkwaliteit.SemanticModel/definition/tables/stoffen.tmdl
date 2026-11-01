@@ -1,0 +1,100 @@
+table stoffen
+	lineageTag: 7b98f831-86e5-458d-9e04-9a66d9ee947d
+
+	measure 'WHO-dagrichtlijn' = SELECTEDVALUE ( stoffen[who_dag] )
+		formatString: 0
+		displayFolder: Normen
+		lineageTag: d21f4cf5-8bba-4850-aa61-b63adbd90db1
+
+	measure 'WHO-jaarrichtlijn' = SELECTEDVALUE ( stoffen[who_jaar] )
+		formatString: 0
+		displayFolder: Normen
+		lineageTag: 58a0ab48-d129-46e2-b9ee-bd9417190291
+
+	measure 'EU 2030-jaargrens' = SELECTEDVALUE ( stoffen[eu_2030_jaar] )
+		formatString: 0
+		displayFolder: Normen
+		lineageTag: 37148044-57f4-44d6-bec3-44d612456c5a
+
+	column stof
+		dataType: string
+		lineageTag: 3f50f3ab-fa59-4b46-b824-d04a85fcaac4
+		summarizeBy: none
+		sourceColumn: stof
+
+		annotation SummarizationSetBy = Automatic
+
+	column naam
+		dataType: string
+		sortByColumn: volgorde
+		lineageTag: 32f587dd-d1d1-4d8f-ad98-1f49c166c6ef
+		summarizeBy: none
+		sourceColumn: naam
+
+		annotation SummarizationSetBy = Automatic
+
+	column who_dag
+		dataType: double
+		formatString: 0
+		lineageTag: 0eccc0b7-6063-4da1-81ae-48cc1871c846
+		summarizeBy: none
+		sourceColumn: who_dag
+
+		annotation SummarizationSetBy = Automatic
+
+	column eu_2030_dag
+		dataType: double
+		formatString: 0
+		lineageTag: 748d8c78-01df-4c1d-8d3d-3dd6881c9dcf
+		summarizeBy: none
+		sourceColumn: eu_2030_dag
+
+		annotation SummarizationSetBy = Automatic
+
+	column who_jaar
+		dataType: double
+		formatString: 0
+		lineageTag: 425094af-0f15-427b-b2c1-d2f8a8bb30dc
+		summarizeBy: none
+		sourceColumn: who_jaar
+
+		annotation SummarizationSetBy = Automatic
+
+	column eu_2030_jaar
+		dataType: double
+		formatString: 0
+		lineageTag: 277449d0-1947-43a1-9290-170ce6431401
+		summarizeBy: none
+		sourceColumn: eu_2030_jaar
+
+		annotation SummarizationSetBy = Automatic
+
+	column eu_nu_jaar
+		dataType: double
+		formatString: 0
+		lineageTag: 4899b57c-0737-43d9-9f50-68bdf3c36763
+		summarizeBy: none
+		sourceColumn: eu_nu_jaar
+
+		annotation SummarizationSetBy = Automatic
+
+	column volgorde
+		dataType: int64
+		formatString: 0
+		lineageTag: f801583f-eda4-4fcb-8a44-c5a9c5cbb828
+		summarizeBy: none
+		sourceColumn: volgorde
+
+		annotation SummarizationSetBy = Automatic
+
+	partition stoffen = m
+		mode: import
+		source =
+			let
+			    Inhoud = Csv.Document ( Web.Contents ( DataUrl & "powerbi/stoffen.csv" ), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv] ),
+			    Koppen = Table.PromoteHeaders ( Inhoud, [PromoteAllScalars = true] ),
+			    Types = Table.TransformColumnTypes ( Koppen, {{"stof", type text}, {"naam", type text}, {"who_dag", type number}, {"eu_2030_dag", type number}, {"who_jaar", type number}, {"eu_2030_jaar", type number}, {"eu_nu_jaar", type number}, {"volgorde", Int64.Type}}, "en-US" )
+			in
+			    Types
+
+	annotation PBI_ResultType = Table

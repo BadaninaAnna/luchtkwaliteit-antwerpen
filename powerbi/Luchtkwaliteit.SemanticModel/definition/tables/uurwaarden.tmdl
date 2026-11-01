@@ -1,0 +1,79 @@
+table uurwaarden
+	lineageTag: 5e5c4e79-f214-4172-9ef1-2a492a9b5838
+
+	measure Netwerkmediaan = MEDIAN ( uurwaarden[waarde] )
+		formatString: 0.0
+		displayFolder: Uurwaarden
+		lineageTag: 87f5b5c3-36f9-4aa5-8f7f-e6dbe76b9cdb
+
+	measure 'Netwerkmediaan laatste uur' =
+			VAR t = CALCULATE ( MAX ( uurwaarden[tijdstip] ), REMOVEFILTERS ( Datum ) )
+			RETURN CALCULATE ( MEDIAN ( uurwaarden[waarde] ), REMOVEFILTERS ( Datum ), uurwaarden[tijdstip] = t )
+		formatString: 0.0
+		displayFolder: Uurwaarden
+		lineageTag: 4047af1b-95be-4b3b-9ef4-4f92005a6049
+
+	column reeks_id
+		dataType: int64
+		formatString: 0
+		lineageTag: d875699d-2670-44f3-b9c2-7ef0065d6025
+		summarizeBy: none
+		sourceColumn: reeks_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column waarde
+		dataType: double
+		formatString: 0.0
+		lineageTag: 14cba61f-c5d8-4988-a885-530c14a0db1d
+		summarizeBy: none
+		sourceColumn: waarde
+
+		annotation SummarizationSetBy = Automatic
+
+	column tijdstip
+		dataType: dateTime
+		formatString: dd-mm-yyyy hh:nn
+		lineageTag: adddf258-ebe3-423a-8746-317c9298773d
+		summarizeBy: none
+		sourceColumn: tijdstip
+
+		annotation SummarizationSetBy = Automatic
+
+	column datum
+		dataType: dateTime
+		formatString: dd-mm-yyyy
+		lineageTag: 03233d2d-000c-4cee-a5af-90fdd99df845
+		summarizeBy: none
+		sourceColumn: datum
+
+		annotation SummarizationSetBy = Automatic
+
+	column uren_geleden
+		dataType: double
+		formatString: 0
+		lineageTag: bf5a902f-ec02-46c8-8601-fe8f56f8739c
+		summarizeBy: none
+		sourceColumn: uren_geleden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition uurwaarden = m
+		mode: import
+		source =
+			let
+			    Nu = DateTime.LocalNow (),
+			    // vorige en huidige maand: genoeg voor de laatste 7 dagen, ook vlak na een maandwissel
+			    Maanden = List.Transform ( { 1, 0 }, each Date.ToText ( Date.AddMonths ( Date.From ( Nu ), - _ ), "yyyy-MM", "en-US" ) ),
+			    Lees = ( m as text ) as table =>
+			        Table.PromoteHeaders ( Csv.Document ( Web.Contents ( DataUrl & "metingen/" & m & ".csv" ), [Delimiter = ",", Encoding = 65001] ), [PromoteAllScalars = true] ),
+			    Samen = Table.Combine ( List.Transform ( Maanden, Lees ) ),
+			    Types = Table.TransformColumnTypes ( Samen, { { "reeks_id", Int64.Type }, { "waarde", type number } }, "en-US" ),
+			    Tijd = Table.AddColumn ( Types, "tijdstip", each DateTimeZone.RemoveZone ( DateTimeZone.ToLocal ( DateTimeZone.FromText ( Text.Replace ( [tijdstip_utc], "Z", ":00+00:00" ) ) ) ), type datetime ),
+			    Datum = Table.AddColumn ( Tijd, "datum", each DateTime.Date ( [tijdstip] ), type date ),
+			    UrenGeleden = Table.AddColumn ( Datum, "uren_geleden", each Duration.TotalHours ( Nu - [tijdstip] ), type number ),
+			    Resultaat = Table.RemoveColumns ( UrenGeleden, { "tijdstip_utc" } )
+			in
+			    Resultaat
+
+	annotation PBI_ResultType = Table
