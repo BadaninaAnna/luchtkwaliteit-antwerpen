@@ -64,6 +64,33 @@ Jaargemiddelden 2025 over alle stations (mediaan van de stations):
 Alle stations halen de huidige EU-normen ruim. Maar voor PM2,5 en NO₂ ligt de mediaan van de stations nog
 **boven de strengere grenswaarden die vanaf 2030 gelden**, en overal boven de WHO-richtlijnen.
 
+## Power BI-rapport op live data
+
+Naast het webdashboard is er een Power BI-rapport dat **rechtstreeks van GitHub leest**. De workflow schrijft
+elk uur kant-en-klare tabellen naar `data/powerbi/`; het rapport haalt die op, samen met de uurwaarden van de
+lopende en vorige maand. **Vernieuwen** in Power BI geeft dus altijd de laatste metingen.
+
+- **Semantisch model in TMDL** (Power BI-projectformaat, PBIP): uurwaarden en daggemiddelden als feitentabellen,
+  meetreeksen en stoffen (met normen) als dimensies, plus een DAX-datumtabel.
+- **DAX-measures:** onder meer de netwerkmediaan van het laatste uur, het aandeel stationsdagen boven de
+  WHO-dagrichtlijn en de EU 2030-daggrens, en tellers per kwaliteitsstatus.
+- **Rapport als code:** model en pagina's worden gegenereerd door [`src/bouw_pbip.py`](src/bouw_pbip.py).
+- Volledig rapport als PDF: [powerbi/Luchtkwaliteit.pdf](powerbi/Luchtkwaliteit.pdf)
+
+![Power BI – Nu](docs/powerbi/1_nu.png)
+
+<details>
+<summary>Overige pagina's: normen, trend en datakwaliteit</summary>
+
+![Power BI – Normen](docs/powerbi/2_normen.png)
+![Power BI – Trend](docs/powerbi/3_trend.png)
+![Power BI – Datakwaliteit](docs/powerbi/4_datakwaliteit.png)
+
+</details>
+
+Openen: `powerbi/Luchtkwaliteit.pbip` in Power BI Desktop → **Vernieuwen**. Vraagt Power BI naar
+privacyniveaus voor `raw.githubusercontent.com`, kies dan *Openbaar*.
+
 ## Projectstructuur
 
 ```

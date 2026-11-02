@@ -2,3 +2,4 @@ expression DataUrl = "https://raw.githubusercontent.com/BadaninaAnna/luchtkwalit
 	lineageTag: 95dd3576-d6ac-4848-a8f7-d94f278cd600
 
 	annotation PBI_ResultType = Text
+

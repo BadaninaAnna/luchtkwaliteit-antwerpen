@@ -49,6 +49,8 @@ table uurwaarden
 
 		annotation SummarizationSetBy = Automatic
 
+		annotation UnderlyingDateTimeDataType = Date
+
 	column uren_geleden
 		dataType: double
 		formatString: 0
@@ -61,19 +63,20 @@ table uurwaarden
 	partition uurwaarden = m
 		mode: import
 		source =
-			let
-			    Nu = DateTime.LocalNow (),
-			    // vorige en huidige maand: genoeg voor de laatste 7 dagen, ook vlak na een maandwissel
-			    Maanden = List.Transform ( { 1, 0 }, each Date.ToText ( Date.AddMonths ( Date.From ( Nu ), - _ ), "yyyy-MM", "en-US" ) ),
-			    Lees = ( m as text ) as table =>
-			        Table.PromoteHeaders ( Csv.Document ( Web.Contents ( DataUrl & "metingen/" & m & ".csv" ), [Delimiter = ",", Encoding = 65001] ), [PromoteAllScalars = true] ),
-			    Samen = Table.Combine ( List.Transform ( Maanden, Lees ) ),
-			    Types = Table.TransformColumnTypes ( Samen, { { "reeks_id", Int64.Type }, { "waarde", type number } }, "en-US" ),
-			    Tijd = Table.AddColumn ( Types, "tijdstip", each DateTimeZone.RemoveZone ( DateTimeZone.ToLocal ( DateTimeZone.FromText ( Text.Replace ( [tijdstip_utc], "Z", ":00+00:00" ) ) ) ), type datetime ),
-			    Datum = Table.AddColumn ( Tijd, "datum", each DateTime.Date ( [tijdstip] ), type date ),
-			    UrenGeleden = Table.AddColumn ( Datum, "uren_geleden", each Duration.TotalHours ( Nu - [tijdstip] ), type number ),
-			    Resultaat = Table.RemoveColumns ( UrenGeleden, { "tijdstip_utc" } )
-			in
-			    Resultaat
+				let
+				    Nu = DateTime.LocalNow (),
+				    // vorige en huidige maand: genoeg voor de laatste 7 dagen, ook vlak na een maandwissel
+				    Maanden = List.Transform ( { 1, 0 }, each Date.ToText ( Date.AddMonths ( Date.From ( Nu ), - _ ), "yyyy-MM", "en-US" ) ),
+				    Lees = ( m as text ) as table =>
+				        Table.PromoteHeaders ( Csv.Document ( Web.Contents ( DataUrl & "metingen/" & m & ".csv" ), [Delimiter = ",", Encoding = 65001] ), [PromoteAllScalars = true] ),
+				    Samen = Table.Combine ( List.Transform ( Maanden, Lees ) ),
+				    Types = Table.TransformColumnTypes ( Samen, { { "reeks_id", Int64.Type }, { "waarde", type number } }, "en-US" ),
+				    Tijd = Table.AddColumn ( Types, "tijdstip", each DateTimeZone.RemoveZone ( DateTimeZone.ToLocal ( DateTimeZone.FromText ( Text.Replace ( [tijdstip_utc], "Z", ":00+00:00" ) ) ) ), type datetime ),
+				    Datum = Table.AddColumn ( Tijd, "datum", each DateTime.Date ( [tijdstip] ), type date ),
+				    UrenGeleden = Table.AddColumn ( Datum, "uren_geleden", each Duration.TotalHours ( Nu - [tijdstip] ), type number ),
+				    Resultaat = Table.RemoveColumns ( UrenGeleden, { "tijdstip_utc" } )
+				in
+				    Resultaat
 
 	annotation PBI_ResultType = Table
+

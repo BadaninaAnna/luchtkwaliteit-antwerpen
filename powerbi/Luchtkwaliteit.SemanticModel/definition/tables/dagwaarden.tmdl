@@ -47,6 +47,8 @@ table dagwaarden
 
 		annotation SummarizationSetBy = Automatic
 
+		annotation UnderlyingDateTimeDataType = Date
+
 	column daggemiddelde
 		dataType: double
 		formatString: 0.0
@@ -86,11 +88,12 @@ table dagwaarden
 	partition dagwaarden = m
 		mode: import
 		source =
-			let
-			    Inhoud = Csv.Document ( Web.Contents ( DataUrl & "powerbi/dagwaarden.csv" ), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv] ),
-			    Koppen = Table.PromoteHeaders ( Inhoud, [PromoteAllScalars = true] ),
-			    Types = Table.TransformColumnTypes ( Koppen, {{"reeks_id", Int64.Type}, {"stof", type text}, {"datum", type date}, {"daggemiddelde", type number}, {"uren", Int64.Type}, {"boven_who", Int64.Type}, {"boven_eu_2030", Int64.Type}}, "en-US" )
-			in
-			    Types
+				let
+				    Inhoud = Csv.Document ( Web.Contents ( DataUrl & "powerbi/dagwaarden.csv" ), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv] ),
+				    Koppen = Table.PromoteHeaders ( Inhoud, [PromoteAllScalars = true] ),
+				    Types = Table.TransformColumnTypes ( Koppen, {{"reeks_id", Int64.Type}, {"stof", type text}, {"datum", type date}, {"daggemiddelde", type number}, {"uren", Int64.Type}, {"boven_who", Int64.Type}, {"boven_eu_2030", Int64.Type}}, "en-US" )
+				in
+				    Types
 
 	annotation PBI_ResultType = Table
+

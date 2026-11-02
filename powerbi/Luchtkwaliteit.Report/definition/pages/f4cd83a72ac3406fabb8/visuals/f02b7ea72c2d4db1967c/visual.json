@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "f02b7ea72c2d4db1967c",
   "position": {
     "x": 980,
     "y": 380,
     "z": 8000,
-    "width": 900,
     "height": 670,
+    "width": 900,
     "tabOrder": 8000
   },
   "visual": {
@@ -27,8 +27,8 @@
                 }
               },
               "queryRef": "Datum.Maand",
-              "displayName": "Maand",
-              "active": true
+              "active": true,
+              "displayName": "Maand"
             }
           ]
         },
@@ -66,11 +66,9 @@
             },
             "direction": "Ascending"
           }
-        ],
-        "isDefaultSort": false
+        ]
       }
     },
-    "drillFilterOtherVisuals": true,
     "objects": {
       "labels": [
         {
@@ -120,6 +118,7 @@
           }
         }
       ]
-    }
+    },
+    "drillFilterOtherVisuals": true
   }
 }

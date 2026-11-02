@@ -1,0 +1,315 @@
+cultureInfo en-US
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "reeksen.station_label": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "reeksen",
+			          "ConceptualProperty": "station_label"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Station": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "reeksen.status_label": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "reeksen",
+			          "ConceptualProperty": "status_label"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Status": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "reeksen.stof": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "reeksen",
+			          "ConceptualProperty": "stof"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Stof": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "reeksen.laatste_meting": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "reeksen",
+			          "ConceptualProperty": "laatste_meting"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Laatste meting": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "reeksen.volledigheid_7d": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "reeksen",
+			          "ConceptualProperty": "volledigheid_7d"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Volledig 7 d": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "reeksen.volledigheid_30d": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "reeksen",
+			          "ConceptualProperty": "volledigheid_30d"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Volledig 30 d": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "reeksen.vlakke_uren_30d": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "reeksen",
+			          "ConceptualProperty": "vlakke_uren_30d"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Vlakke uren 30 d": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "reeksen.lokale_pieken_30d": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "reeksen",
+			          "ConceptualProperty": "lokale_pieken_30d"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Lokale pieken 30 d": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "reeksen.reden": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "reeksen",
+			          "ConceptualProperty": "reden"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Opmerking": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "uurwaarden.tijdstip": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "uurwaarden",
+			          "ConceptualProperty": "tijdstip"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Tijdstip": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "uurwaarden.netwerkmediaan": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "uurwaarden",
+			          "ConceptualProperty": "Netwerkmediaan"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Netwerkmediaan (µg/m³)": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dagwaarden.gemiddelde": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dagwaarden",
+			          "ConceptualProperty": "Gemiddelde"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Gemiddelde (µg/m³)": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Gemiddelde": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dagwaarden.stationsdagen_boven_who": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dagwaarden",
+			          "ConceptualProperty": "Stationsdagen boven WHO"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Stationsdagen boven WHO": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "datum.maand": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Datum",
+			          "ConceptualProperty": "Maand"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Maand": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

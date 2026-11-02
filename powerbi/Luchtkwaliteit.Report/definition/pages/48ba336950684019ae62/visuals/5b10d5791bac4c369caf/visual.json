@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "5b10d5791bac4c369caf",
   "position": {
     "x": 40,
     "y": 380,
     "z": 5000,
-    "width": 1840,
     "height": 670,
+    "width": 1840,
     "tabOrder": 5000
   },
   "visual": {
@@ -161,11 +161,9 @@
             },
             "direction": "Ascending"
           }
-        ],
-        "isDefaultSort": false
+        ]
       }
     },
-    "drillFilterOtherVisuals": true,
     "objects": {
       "total": [
         {
@@ -307,6 +305,11 @@
             "metadata": "reeksen.reden"
           }
         }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
       ]
     },
     "visualContainerObjects": {
@@ -343,6 +346,7 @@
           }
         }
       ]
-    }
+    },
+    "drillFilterOtherVisuals": true
   }
 }

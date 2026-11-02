@@ -62,9 +62,9 @@ table reeksen
 
 	column lat
 		dataType: double
-		dataCategory: Latitude
 		formatString: 0.00000
 		lineageTag: ca6447e8-e79b-408d-a96c-620a4e934905
+		dataCategory: Latitude
 		summarizeBy: none
 		sourceColumn: lat
 
@@ -72,9 +72,9 @@ table reeksen
 
 	column lon
 		dataType: double
-		dataCategory: Longitude
 		formatString: 0.00000
 		lineageTag: fd8ec0c3-5912-4c0e-b4b1-8d703031242f
+		dataCategory: Longitude
 		summarizeBy: none
 		sourceColumn: lon
 
@@ -176,10 +176,10 @@ table reeksen
 
 	column status_label
 		dataType: string
-		sortByColumn: status_volgorde
 		lineageTag: b6c10f66-8ebd-422a-83c1-2fc508117b66
 		summarizeBy: none
 		sourceColumn: status_label
+		sortByColumn: status_volgorde
 
 		annotation SummarizationSetBy = Automatic
 
@@ -195,11 +195,12 @@ table reeksen
 	partition reeksen = m
 		mode: import
 		source =
-			let
-			    Inhoud = Csv.Document ( Web.Contents ( DataUrl & "powerbi/reeksen.csv" ), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv] ),
-			    Koppen = Table.PromoteHeaders ( Inhoud, [PromoteAllScalars = true] ),
-			    Types = Table.TransformColumnTypes ( Koppen, {{"reeks_id", Int64.Type}, {"station_id", Int64.Type}, {"station_code", type text}, {"station", type text}, {"lat", type number}, {"lon", type number}, {"stof", type text}, {"eenheid", type text}, {"status", type text}, {"reden", type text}, {"laatste_meting", type datetime}, {"laatste_waarde", type number}, {"volledigheid_7d", type number}, {"volledigheid_30d", type number}, {"vlakke_uren_30d", Int64.Type}, {"lokale_pieken_30d", Int64.Type}, {"station_label", type text}, {"status_label", type text}, {"status_volgorde", Int64.Type}}, "en-US" )
-			in
-			    Types
+				let
+				    Inhoud = Csv.Document ( Web.Contents ( DataUrl & "powerbi/reeksen.csv" ), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv] ),
+				    Koppen = Table.PromoteHeaders ( Inhoud, [PromoteAllScalars = true] ),
+				    Types = Table.TransformColumnTypes ( Koppen, {{"reeks_id", Int64.Type}, {"station_id", Int64.Type}, {"station_code", type text}, {"station", type text}, {"lat", type number}, {"lon", type number}, {"stof", type text}, {"eenheid", type text}, {"status", type text}, {"reden", type text}, {"laatste_meting", type datetime}, {"laatste_waarde", type number}, {"volledigheid_7d", type number}, {"volledigheid_30d", type number}, {"vlakke_uren_30d", Int64.Type}, {"lokale_pieken_30d", Int64.Type}, {"station_label", type text}, {"status_label", type text}, {"status_volgorde", Int64.Type}}, "en-US" )
+				in
+				    Types
 
 	annotation PBI_ResultType = Table
+

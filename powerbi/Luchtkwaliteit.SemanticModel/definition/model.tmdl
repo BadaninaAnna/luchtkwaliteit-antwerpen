@@ -10,9 +10,14 @@ annotation PBI_QueryOrder = ["DataUrl", "uurwaarden", "dagwaarden", "reeksen", "
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
+annotation PBI_ProTooling = ["DevMode"]
+
 ref table Datum
 ref table uurwaarden
 ref table dagwaarden
 ref table reeksen
 ref table stoffen
 ref table meta
+
+ref cultureInfo en-US
+

@@ -1,12 +1,12 @@
 table stoffen
 	lineageTag: 7b98f831-86e5-458d-9e04-9a66d9ee947d
 
-	measure 'WHO-dagrichtlijn' = SELECTEDVALUE ( stoffen[who_dag] )
+	measure WHO-dagrichtlijn = SELECTEDVALUE ( stoffen[who_dag] )
 		formatString: 0
 		displayFolder: Normen
 		lineageTag: d21f4cf5-8bba-4850-aa61-b63adbd90db1
 
-	measure 'WHO-jaarrichtlijn' = SELECTEDVALUE ( stoffen[who_jaar] )
+	measure WHO-jaarrichtlijn = SELECTEDVALUE ( stoffen[who_jaar] )
 		formatString: 0
 		displayFolder: Normen
 		lineageTag: 58a0ab48-d129-46e2-b9ee-bd9417190291
@@ -26,10 +26,10 @@ table stoffen
 
 	column naam
 		dataType: string
-		sortByColumn: volgorde
 		lineageTag: 32f587dd-d1d1-4d8f-ad98-1f49c166c6ef
 		summarizeBy: none
 		sourceColumn: naam
+		sortByColumn: volgorde
 
 		annotation SummarizationSetBy = Automatic
 
@@ -90,11 +90,12 @@ table stoffen
 	partition stoffen = m
 		mode: import
 		source =
-			let
-			    Inhoud = Csv.Document ( Web.Contents ( DataUrl & "powerbi/stoffen.csv" ), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv] ),
-			    Koppen = Table.PromoteHeaders ( Inhoud, [PromoteAllScalars = true] ),
-			    Types = Table.TransformColumnTypes ( Koppen, {{"stof", type text}, {"naam", type text}, {"who_dag", type number}, {"eu_2030_dag", type number}, {"who_jaar", type number}, {"eu_2030_jaar", type number}, {"eu_nu_jaar", type number}, {"volgorde", Int64.Type}}, "en-US" )
-			in
-			    Types
+				let
+				    Inhoud = Csv.Document ( Web.Contents ( DataUrl & "powerbi/stoffen.csv" ), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv] ),
+				    Koppen = Table.PromoteHeaders ( Inhoud, [PromoteAllScalars = true] ),
+				    Types = Table.TransformColumnTypes ( Koppen, {{"stof", type text}, {"naam", type text}, {"who_dag", type number}, {"eu_2030_dag", type number}, {"who_jaar", type number}, {"eu_2030_jaar", type number}, {"eu_nu_jaar", type number}, {"volgorde", Int64.Type}}, "en-US" )
+				in
+				    Types
 
 	annotation PBI_ResultType = Table
+

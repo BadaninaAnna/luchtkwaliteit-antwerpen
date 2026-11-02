@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Luchtkwaliteit"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "99952e07-0889-4c8c-9c56-063f10a28a88"
+  }
+}

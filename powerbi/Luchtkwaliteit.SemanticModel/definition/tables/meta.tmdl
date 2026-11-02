@@ -27,11 +27,12 @@ table meta
 	partition meta = m
 		mode: import
 		source =
-			let
-			    Inhoud = Csv.Document ( Web.Contents ( DataUrl & "powerbi/meta.csv" ), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv] ),
-			    Koppen = Table.PromoteHeaders ( Inhoud, [PromoteAllScalars = true] ),
-			    Types = Table.TransformColumnTypes ( Koppen, {{"laatste_meting", type datetime}, {"bijgewerkt", type datetime}}, "en-US" )
-			in
-			    Types
+				let
+				    Inhoud = Csv.Document ( Web.Contents ( DataUrl & "powerbi/meta.csv" ), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv] ),
+				    Koppen = Table.PromoteHeaders ( Inhoud, [PromoteAllScalars = true] ),
+				    Types = Table.TransformColumnTypes ( Koppen, {{"laatste_meting", type datetime}, {"bijgewerkt", type datetime}}, "en-US" )
+				in
+				    Types
 
 	annotation PBI_ResultType = Table
+
