@@ -2,7 +2,7 @@
 
 **▶ Live dashboard: [badaninaanna.github.io/luchtkwaliteit-antwerpen](https://badaninaanna.github.io/luchtkwaliteit-antwerpen/)**
 
-*Elk uur automatisch bijgewerkt met de nieuwste metingen van 37 officiële meetstations rond Antwerpen.*
+*Automatisch bijgewerkt, meerdere keren per dag, met de nieuwste metingen van 37 officiële meetstations rond Antwerpen.*
 
 **Tools:** Python (pandas) · GitHub Actions (geplande ETL) · GitHub Pages · Plotly · REST-API · metrologische kwaliteitscontrole
 
@@ -13,16 +13,18 @@
 Een volledig geautomatiseerde datapijplijn, zonder server of betaalde diensten:
 
 ```
-IRCEL-CELINE API  ──(elk uur, GitHub Actions)──►  ophalen.py  ──►  data/metingen/*.csv
+IRCEL-CELINE API  ──(geplande GitHub Actions)──►  ophalen.py  ──►  data/metingen/*.csv
                                                                           │
                                        kwaliteit.py (controles + normen) ◄┘
                                                     │
                                        dashboard.py ─►  docs/index.html  ──►  GitHub Pages
 ```
 
-1. **Ophalen.** Elk uur haalt een GitHub Actions-workflow de uurwaarden van 81 meetreeksen op
+1. **Ophalen.** Een geplande GitHub Actions-workflow haalt meerdere keren per dag de uurwaarden van 81 meetreeksen op
    (NO₂, PM2,5, PM10, black carbon, ozon) bij de REST-API van IRCEL-CELINE. De laatste 7 dagen worden telkens
-   opnieuw opgehaald, omdat recente (voorlopige) waarden nog gecorrigeerd worden.
+   opnieuw opgehaald, omdat recente (voorlopige) waarden nog gecorrigeerd worden. De workflow staat elk uur
+   gepland, maar GitHub voert geplande taken uit zodra er capaciteit is; in de praktijk is dat meerdere keren per
+   dag. Het tijdstip van de laatste meting staat altijd bovenaan het dashboard.
 2. **Controleren.** Elke uurwaarde krijgt automatische kwaliteitsvlaggen (zie hieronder).
 3. **Toetsen.** Daggemiddelden en jaargemiddelden worden getoetst aan de WHO-richtlijnen 2021 en de nieuwe
    EU-grenswaarden die vanaf 2030 gelden.
@@ -67,8 +69,8 @@ Alle stations halen de huidige EU-normen ruim. Maar voor PM2,5 en NO₂ ligt de 
 ## Power BI-rapport op live data
 
 Naast het webdashboard is er een Power BI-rapport dat **rechtstreeks van GitHub leest**. De workflow schrijft
-elk uur kant-en-klare tabellen naar `data/powerbi/`; het rapport haalt die op, samen met de uurwaarden van de
-lopende en vorige maand. **Vernieuwen** in Power BI geeft dus altijd de laatste metingen.
+bij elke update kant-en-klare tabellen naar `data/powerbi/`; het rapport haalt die op, samen met de uurwaarden van de
+lopende en vorige maand. **Vernieuwen** in Power BI geeft dus altijd de laatst opgehaalde metingen.
 
 - **Semantisch model in TMDL** (Power BI-projectformaat, PBIP): uurwaarden en daggemiddelden als feitentabellen,
   meetreeksen en stoffen (met normen) als dimensies, plus een DAX-datumtabel.
@@ -94,7 +96,7 @@ privacyniveaus voor `raw.githubusercontent.com`, kies dan *Openbaar*.
 ## Projectstructuur
 
 ```
-├── .github/workflows/bijwerken.yml   # geplande workflow: elk uur ophalen, controleren, publiceren
+├── .github/workflows/bijwerken.yml   # geplande workflow: ophalen, controleren, publiceren
 ├── src/
 │   ├── ophalen.py                    # REST-API → maandelijkse CSV's (incrementeel, idempotent)
 │   ├── kwaliteit.py                  # uurrooster, kwaliteitsvlaggen, status, dag- en jaarnormen

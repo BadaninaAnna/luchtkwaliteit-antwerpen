@@ -4,7 +4,7 @@ Gebruik:  python src/bouw_pbip.py
 Uitvoer:  powerbi/Luchtkwaliteit.pbip  (+ .SemanticModel/ en .Report/)
 
 Het model leest de data rechtstreeks van GitHub (raw.githubusercontent.com). De workflow
-werkt die bestanden elk uur bij, dus Vernieuwen in Power BI haalt altijd de laatste metingen op.
+werkt die bestanden meerdere keren per dag bij; Vernieuwen in Power BI haalt de laatst opgehaalde metingen op.
 """
 from __future__ import annotations
 
@@ -382,7 +382,7 @@ def paginas():
     # ------------------------------------------------------------------ Nu
     p["Nu"] = ([
         kop("Luchtkwaliteit Antwerpen: live",
-            "37 officiële meetstations · data van IRCEL-CELINE, elk uur bijgewerkt via GitHub Actions · klik op Vernieuwen voor de laatste metingen"),
+            "37 officiële meetstations · data van IRCEL-CELINE, meerdere keren per dag bijgewerkt via GitHub Actions · klik op Vernieuwen voor de laatste metingen"),
         stofslicer(),
         kaart(40, 190, 440, 170, "uurwaarden", "Netwerkmediaan laatste uur", "Netwerkmediaan laatste uur (µg/m³)"),
         kaart(500, 190, 440, 170, "stoffen", "WHO-dagrichtlijn", "WHO-dagrichtlijn (µg/m³)"),

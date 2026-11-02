@@ -30,7 +30,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "37 officiële meetstations · data van IRCEL-CELINE, elk uur bijgewerkt via GitHub Actions · klik op Vernieuwen voor de laatste metingen",
+                    "value": "37 officiële meetstations · data van IRCEL-CELINE, meerdere keren per dag bijgewerkt via GitHub Actions · klik op Vernieuwen voor de laatste metingen",
                     "textStyle": {
                       "fontSize": "16pt"
                     }
